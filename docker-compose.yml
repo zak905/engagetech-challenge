@@ -1,0 +1,23 @@
+version: '2.1'
+services: 
+  api:
+    build: api
+    ports:
+    - "8090:8090"
+    depends_on:
+            - database
+  front-end:
+    build: front-end
+    ports:
+    - "80:80"
+    depends_on:
+      - api
+  database:
+    image: mysql:5.7.21
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: expenses
+        MYSQL_USER: tester
+        MYSQL_PASSWORD: password
+    ports:
+    - "3306:3306"
